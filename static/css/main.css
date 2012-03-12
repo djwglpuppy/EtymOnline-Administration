@@ -1,0 +1,21 @@
+body,.modal-header{background:url("../img/bg-leather.jpg") repeat top left}
+.well,#modalform{background:url("../img/paper.jpg") repeat top left}
+#modalform{border:none;border-radius:0}
+.modal-header h3,.modal-header .close{color:#f5f5f5}
+#searchitems{margin-top:50px;min-height:300px;}
+#searchitems input[type='text']{width:95%}
+#searchitems #searchbtn{margin-bottom:10px}
+#content{margin-top:50px;}
+#content #notifier{display:none;}
+#content #notifier .type{font-weight:bold}
+#content #notifier .msg{margin-left:5px}
+#content #termdetail{min-height:300px;position:relative;}
+#content #termdetail .updated{padding:3px;margin:5px 0;max-width:220px;display:none}
+#content #termdetail .detailedinfo{overflow:hidden;padding-bottom:60px}
+#content #termdetail #buttonarea,#content #termdetail #navarea{display:none;position:absolute;bottom:10px;}
+#content #termdetail #buttonarea .btns,#content #termdetail #navarea .btns{margin-right:10px}
+#content #termdetail #buttonarea{right:10px}
+#content #termdetail #navarea{left:10px}
+#modalform{width:600px;}
+#modalform input[type='text'],#modalform textarea{width:400px}
+#modalform textarea{height:220px}

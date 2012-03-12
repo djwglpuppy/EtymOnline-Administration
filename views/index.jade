@@ -1,0 +1,63 @@
+.navbar.navbar-fixed-top
+	.navbar-inner
+		.container-fluid
+			.brand etymonline.com administration
+			.nav.pull-right
+				#createbtn.btn
+					span.icon-plus-sign
+					|  Create New Term
+.container-fluid: div.row-fluid
+	.span3
+		#searchitems.well.sidebar-nav
+			input(type='text', placeholder='search for a term...', name='searchinput').searchinput
+			#searchbtn.btn.btn-primary.searchbtn
+				span.icon-search.icon-white
+				|  Search
+			ul.nav.nav-list
+
+	#content.span9
+		#notifier.alert.fade.in
+			a.close.hideme ×
+			strong.type Awesome
+			span.msg Super Toll
+		#termdetail.well
+			h1 search for a term
+				small
+			.label.label-info.updated
+			.detailedinfo
+			
+			#navarea
+				#prevbtn.btn.btns: span.icon-chevron-left
+				#nextbtn.btn.btns: span.icon-chevron-right
+			#buttonarea
+				#deletebtn.btn-danger.btn.btns
+					span.icon-trash.icon-white
+					|  Delete
+				#editbtn.btn-primary.btn.btns
+					span.icon-pencil.icon-white
+					|  Edit
+		
+
+#modalform.modal.hide
+	.modal-header
+		a.close(data-dismiss='modal') ×
+		h3 Term
+	.modal-body.form-horizontal
+		.control-group
+			label.control-label Term
+			.controls: input(type='text', name='term')
+		.control-group
+			label.control-label Term Suffix
+			.controls: input(type='text', name='term_suffix')
+		.control-group
+			label.control-label Etym
+			.controls: textarea(name='etym')
+
+	.modal-footer
+		#savebtn.btn.btn-primary
+			span.icon-ok.icon-white
+			|  Save Changes
+		#cancelbtn.btn.btn.btns
+			span.icon-remove
+			|  Cancel
+
