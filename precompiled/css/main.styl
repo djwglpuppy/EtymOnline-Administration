@@ -19,6 +19,34 @@ body, .modal-header
 		width 95%
 	#searchbtn
 		margin-bottom 10px
+	#searchlines
+		.lineitem
+			cursor pointer
+			height 26px
+			position relative
+			border-radius 3px
+			-moz-border-radius 3px
+			-webkit-border-radius 3px
+			.text
+				color #5E0A0A
+				font-size 14px
+				position absolute
+				top 3px
+				left 5px
+			.icon
+				position absolute
+				top 6px
+				right 3px
+				display: none
+			&:hover
+				background-color #C6C6C0
+			&.sel
+				background-color #5E0A0A
+				.text
+					color #FFF
+				.icon
+					display block
+				
 
 #content
 	margin-top 50px

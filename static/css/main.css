@@ -5,6 +5,13 @@ body,.modal-header{background:url("../img/bg-leather.jpg") repeat top left}
 #searchitems{margin-top:50px;min-height:300px;}
 #searchitems input[type='text']{width:95%}
 #searchitems #searchbtn{margin-bottom:10px}
+#searchitems #searchlines .lineitem{cursor:pointer;height:26px;position:relative;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
+#searchitems #searchlines .lineitem .text{color:#5e0a0a;font-size:14px;position:absolute;top:3px;left:5px}
+#searchitems #searchlines .lineitem .icon{position:absolute;top:6px;right:3px;display:none}
+#searchitems #searchlines .lineitem:hover{background-color:#c6c6c0}
+#searchitems #searchlines .lineitem.sel{background-color:#5e0a0a;}
+#searchitems #searchlines .lineitem.sel .text{color:#fff}
+#searchitems #searchlines .lineitem.sel .icon{display:block}
 #content{margin-top:50px;}
 #content #notifier{display:none;}
 #content #notifier .type{font-weight:bold}

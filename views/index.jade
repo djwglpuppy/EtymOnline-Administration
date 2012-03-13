@@ -1,3 +1,8 @@
+script(id='termline', type='text/x-handlebars-template')
+	.lineitem
+		.text {{term}}
+		.icon.icon-chevron-right.icon-white
+
 .navbar.navbar-fixed-top
 	.navbar-inner
 		.container-fluid
@@ -13,7 +18,7 @@
 			#searchbtn.btn.btn-primary.searchbtn
 				span.icon-search.icon-white
 				|  Search
-			ul.nav.nav-list
+			#searchlines
 
 	#content.span9
 		#notifier.alert.fade.in

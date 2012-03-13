@@ -1,3 +1,6 @@
+Template = 
+	termline: ""
+
 Term = Backbone.Model.extend
 	parent: null
 	idAttribute: "_id"
@@ -6,12 +9,11 @@ Term = Backbone.Model.extend
 	selected: false
 
 	createItem: (append = true) ->
-		@link = $(document.createElement("li"))
-		@link.html("<a href='#'>#{@get("term")}</a>")
+		@link = $(Template.termline({term: @get("term")}))
 		if append
-			$("ul").append(@link)
+			$("#searchlines").append(@link)
 		else
-			$("ul").prepend(@link)
+			$("#searchlines").prepend(@link)
 
 		@link.click => @select() 		
 		@select() if @ is @collection.at(0)
@@ -24,13 +26,13 @@ Term = Backbone.Model.extend
 
 	select: ->
 		@collection.deselect()
-		@link.addClass("active")
+		@link.addClass("sel")
 		@selected = true
 		@collection.selectedItem = this
 		@detailDisplay()
 
 	deselect: ->
-		@link.removeClass("active")
+		@link.removeClass("sel")
 		@selected = false
 	
 	detailDisplay: ->
@@ -69,6 +71,9 @@ Terms = Backbone.Collection.extend
 
 
 $ ->
+	
+	Template.termline = Handlebars.compile($("#termline").html());
+	
 	terms = new Terms
 	search = new Input {el:".searchinput"}
 	
@@ -76,7 +81,7 @@ $ ->
 		Notifier.hide()
 		if search.length() is 0
 			initializeDetail()
-			$("ul").empty()
+			$("#searchlines").empty()
 		else
 			terms.search(search.thisVal())
 	
@@ -84,7 +89,7 @@ $ ->
 	$("#searchbtn").click(termSearch)
 	
 	terms.on "reset", -> 
-		$("ul").empty()
+		$("#searchlines").empty()
 		if @length is 0
 			Notifier.msg("Search", "your search returned no results.  try again.")
 			initializeDetail()

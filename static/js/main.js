@@ -1,4 +1,8 @@
-var ModalEditor, Notifier, Term, Terms, initializeDetail;
+var ModalEditor, Notifier, Template, Term, Terms, initializeDetail;
+
+Template = {
+  termline: ""
+};
 
 Term = Backbone.Model.extend({
   parent: null,
@@ -12,12 +16,13 @@ Term = Backbone.Model.extend({
   createItem: function(append) {
     var _this = this;
     if (append == null) append = true;
-    this.link = $(document.createElement("li"));
-    this.link.html("<a href='#'>" + (this.get("term")) + "</a>");
+    this.link = $(Template.termline({
+      term: this.get("term")
+    }));
     if (append) {
-      $("ul").append(this.link);
+      $("#searchlines").append(this.link);
     } else {
-      $("ul").prepend(this.link);
+      $("#searchlines").prepend(this.link);
     }
     this.link.click(function() {
       return _this.select();
@@ -38,13 +43,13 @@ Term = Backbone.Model.extend({
   },
   select: function() {
     this.collection.deselect();
-    this.link.addClass("active");
+    this.link.addClass("sel");
     this.selected = true;
     this.collection.selectedItem = this;
     return this.detailDisplay();
   },
   deselect: function() {
-    this.link.removeClass("active");
+    this.link.removeClass("sel");
     return this.selected = false;
   },
   detailDisplay: function() {
@@ -95,6 +100,7 @@ Terms = Backbone.Collection.extend({
 
 $(function() {
   var nav, search, termSearch, terms;
+  Template.termline = Handlebars.compile($("#termline").html());
   terms = new Terms;
   search = new Input({
     el: ".searchinput"
@@ -103,7 +109,7 @@ $(function() {
     Notifier.hide();
     if (search.length() === 0) {
       initializeDetail();
-      return $("ul").empty();
+      return $("#searchlines").empty();
     } else {
       return terms.search(search.thisVal());
     }
@@ -111,7 +117,7 @@ $(function() {
   search.on("enter", termSearch);
   $("#searchbtn").click(termSearch);
   terms.on("reset", function() {
-    $("ul").empty();
+    $("#searchlines").empty();
     if (this.length === 0) {
       Notifier.msg("Search", "your search returned no results.  try again.");
       return initializeDetail();
