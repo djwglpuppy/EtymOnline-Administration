@@ -51,7 +51,7 @@ Term = Backbone.Model.extend
 						model.link.remove()
 						model.deselect()
 						collection.at(0).select() if collection.at(0)?
-						Notifier.msg("Deletion", "your term <b>#{model.get("term")}</b> as been deleted")		
+						Notifier.msg("Deletion", "<b>#{model.get("term")}</b> has been deleted")		
 						initializeDetail() if collection.length is 0
 
 	formDisplay: -> ModalEditor.editor(@)
@@ -131,7 +131,18 @@ $ ->
 	$("#cancelbtn").click(ModalEditor.hide)
 	$("#savebtn").click -> ModalEditor.save()
 	$("#createbtn").click -> ModalEditor.create(terms)
+	$("#templatebtn").click -> ModalEditor.template()
 	initializeDetail()
+	
+	##Macro Listeners
+	
+	$("#modalform [name='etym']").keyup (e) ->
+		val = $(this).val()
+		if /\#\#/i.test val
+			$(this).val(val.replace /\#\#/i, '<span class="foreign">-----</span>')
+		
+		if /\$\$/i.test val
+			$(this).val(val.replace /\$\$/i, '<span class="crossreference">-----</span>')
 	
 
 Notifier =
@@ -141,7 +152,6 @@ Notifier =
 		clearTimeout(Notifier.timer)
 		$("#notifier").slideUp(300) 
 	msg: (type, msg) ->
-		$("#notifier .type").html(type)
 		$("#notifier .msg").html(msg)
 		@show()
 		Notifier.timer = setTimeout(@hide, 4500)
@@ -192,11 +202,20 @@ ModalEditor =
 					model.createItem(false)
 					model.select()
 					ModalEditor.hide()
-					Notifier.msg("Creation", "your new term <b>#{model.get("term")}</b> as been created")
+					Notifier.msg("Creation", "<b>#{model.get("term")}</b> as been created")
 					
 		else
 			@model.save(newdata)
 			@model.detailDisplay()
 			@model.link.find("a").html(newdata.term)
 			@hide()
-			Notifier.msg("Edit", "your term <b>#{@model.get("term")}</b> as been edited")
+			Notifier.msg("Edit", "<b>#{@model.get("term")}</b> as been edited")
+	
+	template: ->
+		template_text = """<span class="foreign">-----</span> <span class="foreign">-----</span> <span class="foreign">-----</span> <span class="foreign">-----</span> (see <span class="crossreference">-----</span>) + <span class="foreign">-----</span>.
+		from <span class="crossreference">-----</span> + <span class="crossreference">-----</span>.
+		Related: <span class="foreign">-----</span>; <span class="foreign">-----</span>."""
+		$("#modalform [name='etym']").val(template_text)
+		
+	
+	

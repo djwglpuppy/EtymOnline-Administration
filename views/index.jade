@@ -23,7 +23,6 @@ script(id='termline', type='text/x-handlebars-template')
 	#content.span9
 		#notifier.alert.fade.in
 			a.close.hideme ×
-			strong.type Awesome
 			span.msg Super Toll
 		#termdetail.well
 			h1 search for a term
@@ -48,21 +47,26 @@ script(id='termline', type='text/x-handlebars-template')
 		a.close(data-dismiss='modal') ×
 		h3 Term
 	.modal-body.form-horizontal
-		.control-group
-			label.control-label Term
-			.controls: input(type='text', name='term')
-		.control-group
-			label.control-label Term Suffix
-			.controls: input(type='text', name='term_suffix')
-		.control-group
-			label.control-label Etym
-			.controls: textarea(name='etym')
+
+		label Term
+		input(type='text', name='term')
+
+		label Term Suffix
+		input(type='text', name='term_suffix')
+
+		label Etym
+		textarea(name='etym')
+		| type <b>##</b> for <i>foreign</i>
+		| &nbsp;&nbsp;&nbsp;&nbsp; type <b>$$</b> for <i>crossreference</i>
 
 	.modal-footer
 		#savebtn.btn.btn-primary
 			span.icon-ok.icon-white
 			|  Save Changes
-		#cancelbtn.btn.btn.btns
-			span.icon-remove
+		#cancelbtn.btn.btn-danger
+			span.icon-remove.icon-white
 			|  Cancel
+		#templatebtn.btn.btn-info
+			span.icon-file.icon-white
+			|  Load Template
 

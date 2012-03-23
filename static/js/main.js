@@ -70,7 +70,7 @@ Term = Backbone.Model.extend({
             model.link.remove();
             model.deselect();
             if (collection.at(0) != null) collection.at(0).select();
-            Notifier.msg("Deletion", "your term <b>" + (model.get("term")) + "</b> as been deleted");
+            Notifier.msg("Deletion", "<b>" + (model.get("term")) + "</b> has been deleted");
             if (collection.length === 0) return initializeDetail();
           }
         });
@@ -172,7 +172,20 @@ $(function() {
   $("#createbtn").click(function() {
     return ModalEditor.create(terms);
   });
-  return initializeDetail();
+  $("#templatebtn").click(function() {
+    return ModalEditor.template();
+  });
+  initializeDetail();
+  return $("#modalform [name='etym']").keyup(function(e) {
+    var val;
+    val = $(this).val();
+    if (/\#\#/i.test(val)) {
+      $(this).val(val.replace(/\#\#/i, '<span class="foreign">-----</span>'));
+    }
+    if (/\$\$/i.test(val)) {
+      return $(this).val(val.replace(/\$\$/i, '<span class="crossreference">-----</span>'));
+    }
+  });
 });
 
 Notifier = {
@@ -185,7 +198,6 @@ Notifier = {
     return $("#notifier").slideUp(300);
   },
   msg: function(type, msg) {
-    $("#notifier .type").html(type);
     $("#notifier .msg").html(msg);
     this.show();
     return Notifier.timer = setTimeout(this.hide, 4500);
@@ -246,7 +258,7 @@ ModalEditor = {
           model.createItem(false);
           model.select();
           ModalEditor.hide();
-          return Notifier.msg("Creation", "your new term <b>" + (model.get("term")) + "</b> as been created");
+          return Notifier.msg("Creation", "<b>" + (model.get("term")) + "</b> as been created");
         }
       });
     } else {
@@ -254,7 +266,12 @@ ModalEditor = {
       this.model.detailDisplay();
       this.model.link.find("a").html(newdata.term);
       this.hide();
-      return Notifier.msg("Edit", "your term <b>" + (this.model.get("term")) + "</b> as been edited");
+      return Notifier.msg("Edit", "<b>" + (this.model.get("term")) + "</b> as been edited");
     }
+  },
+  template: function() {
+    var template_text;
+    template_text = "<span class=\"foreign\">-----</span> <span class=\"foreign\">-----</span> <span class=\"foreign\">-----</span> <span class=\"foreign\">-----</span> (see <span class=\"crossreference\">-----</span>) + <span class=\"foreign\">-----</span>.\nfrom <span class=\"crossreference\">-----</span> + <span class=\"crossreference\">-----</span>.\nRelated: <span class=\"foreign\">-----</span>; <span class=\"foreign\">-----</span>.";
+    return $("#modalform [name='etym']").val(template_text);
   }
 };

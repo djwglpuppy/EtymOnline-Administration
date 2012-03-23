@@ -24,5 +24,5 @@ body,.modal-header{background:url("../img/bg-leather.jpg") repeat top left}
 #content #termdetail #buttonarea{right:10px}
 #content #termdetail #navarea{left:10px}
 #modalform{width:600px;}
-#modalform input[type='text'],#modalform textarea{width:400px}
-#modalform textarea{height:220px}
+#modalform input[type='text'],#modalform textarea{width:560px;margin-bottom:10px}
+#modalform textarea{height:180px;resize:none}
