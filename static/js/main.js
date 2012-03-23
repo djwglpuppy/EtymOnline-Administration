@@ -177,13 +177,23 @@ $(function() {
   });
   initializeDetail();
   return $("#modalform [name='etym']").keyup(function(e) {
-    var val;
+    var startat, val;
     val = $(this).val();
     if (/\#\#/i.test(val)) {
+      startat = val.search(/\#\#/) + 22;
       $(this).val(val.replace(/\#\#/i, '<span class="foreign">-----</span>'));
+      $(this).caret({
+        start: startat,
+        end: startat + 5
+      });
     }
     if (/\$\$/i.test(val)) {
-      return $(this).val(val.replace(/\$\$/i, '<span class="crossreference">-----</span>'));
+      startat = val.search(/\$\$/) + 29;
+      $(this).val(val.replace(/\$\$/i, '<span class="crossreference">-----</span>'));
+      return $(this).caret({
+        start: startat,
+        end: startat + 5
+      });
     }
   });
 });

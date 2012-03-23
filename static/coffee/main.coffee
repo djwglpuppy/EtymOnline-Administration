@@ -139,10 +139,14 @@ $ ->
 	$("#modalform [name='etym']").keyup (e) ->
 		val = $(this).val()
 		if /\#\#/i.test val
+			startat = val.search(/\#\#/) + 22
 			$(this).val(val.replace /\#\#/i, '<span class="foreign">-----</span>')
+			$(this).caret({start:startat,end:startat + 5})
 		
 		if /\$\$/i.test val
+			startat = val.search(/\$\$/) + 29
 			$(this).val(val.replace /\$\$/i, '<span class="crossreference">-----</span>')
+			$(this).caret({start:startat,end:startat + 5})
 	
 
 Notifier =
